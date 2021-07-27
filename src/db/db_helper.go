@@ -19,17 +19,18 @@ func Start() {
 	defer db.Close()
 
 	//多行查询
+	rows, _ := db.Query("select * from server where id=802")
 	result := make(map[string]string)
-	rows, _ := db.Query("select id,name from server where id=802")
+
 	col, _ := rows.Columns()
 	values := make([][]byte, len(col))
-	scans := make([]interface{}, len(col))
+	scans := make([]interface{}, len(values))
 	for k := range values {
 		scans[k] = &values[k]
 	}
 
 	for rows.Next() {
-		rows.Scan(scans)
+		rows.Scan(scans...)
 		for k, v := range values {
 			key := col[k]
 			result[key] = string(v)
