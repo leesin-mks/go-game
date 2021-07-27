@@ -2,7 +2,6 @@ package main
 
 import (
 	"game-server/src/db"
-	_ "game-server/src/db"
 	"game-server/src/test"
 	"log"
 )
